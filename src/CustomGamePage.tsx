@@ -20,7 +20,7 @@ function getRandomWord() {
   return COLORS[Math.floor(Math.random() * COLORS.length)].name
 }
 
-function GamePage() {
+function CustomGamePage() {
   const navigate = useNavigate()
   const [current, setCurrent] = useState(0)
   const [correct, setCorrect] = useState(0)
@@ -44,7 +44,7 @@ function GamePage() {
     setWrong(0)
     setReactionTimes([])
     setShowWord(true)
-    setTimeLeft(30)
+    setTimeLeft(10)
     setAlert('')
     setWordsShown(1)
   }, [])
@@ -72,23 +72,6 @@ function GamePage() {
     }
   }, [wordObj, showWord, timeLeft])
 
-  // useEffect(() => {
-  //   if (gameFinished) {
-  //     navigate('/resultados', {
-  //       state: {
-  //         correct,
-  //         wrong,
-  //         total: wordsShown,
-  //         percent: wordsShown ? Math.round((correct / wordsShown) * 100) : 0,
-  //         time: 30,
-  //         avgReaction: reactionTimes.length
-  //           ? (reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length).toFixed(2)
-  //           : 0,
-  //         mode: "Normal"
-  //       },
-  //     })
-  //   }
-  // }, [gameFinished, navigate, correct, wrong, wordsShown])
 
   useEffect(() => {
   if (gameFinished) {
@@ -137,11 +120,10 @@ function GamePage() {
 
   function nextWord() {
     if (timeLeft > 0) {
-      setWrong((prev) => prev + 1) // Marca como incorrecta por default si no se responde
       setWordObj({ word: getRandomWord(), color: getRandomColor() })
       setStartTime(Date.now())
       setShowWord(true)
-      setWordsShown((ws) => ws + 1)
+      setWordsShown(ws => ws + 1)
     } else {
       finishGame()
     }
@@ -211,7 +193,7 @@ function GamePage() {
   )
 }
 
-export default GamePage
+export default CustomGamePage
 
 
 
